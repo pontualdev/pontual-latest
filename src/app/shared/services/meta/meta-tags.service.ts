@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, NgZone, PLATFORM_ID } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { PostsModel } from '@core/base-models/posts.model';
 
@@ -12,7 +12,8 @@ export class MetaTagsService {
 
   constructor(
     private meta: Meta,
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) private platformId: any,
+    private ngZone: NgZone
   ) {
     if(isPlatformBrowser(this.platformId)){
       this.url = window.location.href;
@@ -20,7 +21,7 @@ export class MetaTagsService {
   }
 
   addPostDetailsForSocialMediaShareProccess(thePost: PostsModel): boolean{
-
+    // this.updateDefaultMeta(thePost);
     this.meta.addTag({ name: 'og:title', content: thePost.title });
     this.meta.addTag({ name: 'og:description', content: thePost.highlightDescription ?? '' });
     this.meta.addTag({ name: 'og:image', content: thePost.imagePath.mediumImageSize});
@@ -33,6 +34,10 @@ export class MetaTagsService {
     this.meta.addTag({ name: 'twitter:url', content: this.url});
 
     return true;
+  }
+  private updateDefaultMeta(thePost: PostsModel){
+    // let metaOgTitle = document.querySelector("meta[name='og:title']") as HTMLElement;
+    // metaOgTitle.setAttribute("content", "teste");
   }
 
 }

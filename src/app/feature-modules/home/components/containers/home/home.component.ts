@@ -5,7 +5,6 @@ import { AdsModel } from '@core/base-models/ads.model';
 import { PageStructure } from '@core/base-models/page-structure.mode';
 import { CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { SPECIAL_CATEGORIES } from '@core/config/special-categories';
-import { ScreenDimentions } from '@core/services/window/screen-dimentions.service';
 
 @Component({
   selector: 'pontual-home',

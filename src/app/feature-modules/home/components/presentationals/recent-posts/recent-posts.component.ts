@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PostsModel } from '@core/base-models/posts.model';
-import { LIMIT_OF_RECENT_POSTS } from '@core/constants/limitations';
 import { ScreenDimentions } from '@core/services/window/screen-dimentions.service';
 import { slideTo } from '@shared/helpers/functions/slider.func';
 

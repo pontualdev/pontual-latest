@@ -48,7 +48,7 @@ export class CarouselComponent implements OnInit, OnChanges, AfterViewInit {
     if(isPlatformBrowser(this.platformId)){
       let bannerNews = document.querySelectorAll('#bannerNews') as NodeListOf<HTMLElement>;
       bannerNews.forEach((element: HTMLElement) => {
-        console.log(element);
+        // console.log(element);
       });
     }
   }

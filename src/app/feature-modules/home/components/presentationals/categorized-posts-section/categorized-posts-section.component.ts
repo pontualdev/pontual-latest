@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { PageStructure } from '@core/base-models/page-structure.mode';
-import { LIMIT_OF_POSTS_PER_CATEGORIES_ON_HOME_PAGE } from '@core/constants/limitations';
 import { ScreenDimentions } from '@core/services/window/screen-dimentions.service';
 import { slideTo } from '@shared/helpers/functions/slider.func';
 

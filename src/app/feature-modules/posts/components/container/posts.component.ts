@@ -44,7 +44,6 @@ export class PostsComponent implements OnInit {
 
   constructor(
     private postsFacade: PostsFacade,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     public screenDimentions: ScreenDimentions
   ) {}
