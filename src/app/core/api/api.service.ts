@@ -241,6 +241,10 @@ export class ApiService {
                       map((nonTransformedData: any) => {
                           return transformWPDataFormatIntoLocalDataFormat(nonTransformedData)[0];
                       }),
+                      map((transformedData: PostsModel) => {
+                        this.http.get(`${environment.domain}/wp-json/post-views-counter/view-post/${transformedData.id}`).subscribe();
+                        return transformedData;
+                      })
                     )
   }
 

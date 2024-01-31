@@ -219,6 +219,7 @@ export class PostsComponent implements OnInit {
     }
     
     const startDate: Date = new Date();
+    console.log(startDate.getDate())
     startDate.setDate(startDate.getDate() - interval);
     
     const isoDate: string = startDate.toISOString();

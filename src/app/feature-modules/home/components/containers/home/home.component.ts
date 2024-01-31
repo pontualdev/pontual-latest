@@ -5,6 +5,7 @@ import { AdsModel } from '@core/base-models/ads.model';
 import { PageStructure } from '@core/base-models/page-structure.mode';
 import { CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { SPECIAL_CATEGORIES } from '@core/config/special-categories';
+import { slugfy } from '@shared/helpers/functions/text.func';
 
 @Component({
   selector: 'pontual-home',
@@ -43,14 +44,14 @@ export class HomeComponent implements OnInit, OnChanges{
             if(!(SPECIAL_CATEGORIES.includes(categoryWithPosts.label))){
               dataCollect.push({
                   sectionTitle: categoryWithPosts.label,
-                  sectionSlug: categoryWithPosts.label.toLocaleLowerCase(),
+                  sectionSlug: slugfy(categoryWithPosts.label),
                   entries: categoryWithPosts.entries
               });
-              this.activeIndexes[categoryWithPosts.label.toLocaleLowerCase()] = 0;
+              this.activeIndexes[slugfy(categoryWithPosts.label)] = 0;
             }else{
               specialCategories.push({
                 sectionTitle: categoryWithPosts.label,
-                sectionSlug: categoryWithPosts.label.toLocaleLowerCase(),
+                sectionSlug: slugfy(categoryWithPosts.label),
                 entries: categoryWithPosts.entries
             });
           }

@@ -138,45 +138,56 @@
 
 <div class="posts-section relative mt-24 mb-52">
 
-    <div class="no-posts-found my-10" *ngIf="!(this.postsSectionBeforeAdvertisement.length > 0) && !(this.postsSectionAfterAdvertisement.length > 0)">
-        <h1 class=" text-xl font-bold"> Não foram encontradas publicações.</h1>
-    </div>
+    @if (( !(this.postsSectionBeforeAdvertisement.length > 0) && (!(this.postsSectionAfterAdvertisement.length > 0)) )) {
+        <div class="no-posts-found my-10" *ngIf="!(this.postsSectionBeforeAdvertisement.length > 0) && !(this.postsSectionAfterAdvertisement.length > 0)">
+            <h1 class=" text-xl font-bold"> Não foram encontradas publicações.</h1>
+        </div>
 
-    <div class="posts-container postsBeforeAdvertisement flex w-full flex-wrap gap-x-12 gap-y-16 justify-center lg:justify-start items-stretch">
+        <div class="advertisement my-28" *ngIf="this.ads && this.ads[1]">
+            <pontual-ads
+            [ad]="this.ads[1]"
+            [height]="'h-[144px] xl:h-[523px]'"
+            />
+        </div>
 
-        <pontual-post-card
-        *ngFor="let post of postsSectionBeforeAdvertisement; let index = index"
-        [isFirstItem]="(index == 0) ? true : false"
-        [showPostImage]="true"
-        [postImagePath]="post.imagePath"
-        [postTitle]="post.title"
-        [postSlug]="post.slug"
-        [postCategory]="post.categories[0].name"
-        [postHighlightDescription]="post.highlightDescription"
-        [postAuthor]="post.author"
-        [postCreatedAt]="post.created_at"
-        />
-
-    </div>
-    <div class="advertisement my-28" *ngIf="this.ads && this.ads[1]">
-        <pontual-ads
-        [ad]="this.ads[1]"
-        [height]="'h-[144px] xl:h-[523px]'"
-        />
-    </div>
+    } @else {
+        <div class="posts-container postsBeforeAdvertisement flex w-full flex-wrap gap-x-12 gap-y-16 justify-center lg:justify-start items-stretch">
     
-    <div *ngIf="this.postsSectionAfterAdvertisement.length > 0" class="posts-container postsAfterAdvertisement flex w-full flex-wrap gap-x-16 gap-y-16 justify-start items-stretch">
-        <pontual-post-card
-        *ngFor="let post of postsSectionAfterAdvertisement; let index = index"
-        [isFirstItem]="(index == 0) ? true : false"
-        [showPostImage]="true"
-        [postImagePath]="post.imagePath"
-        [postTitle]="post.title"
-        [postSlug]="post.slug"
-        [postCategory]="post.categories[0].name"
-        [postHighlightDescription]="post.highlightDescription"
-        [postAuthor]="post.author"
-        [postCreatedAt]="post.created_at"
-        />
-    </div>
+            <pontual-post-card
+            *ngFor="let postBefore of postsSectionBeforeAdvertisement; let index = index"
+            [isFirstItem]="(index == 0) ? true : false"
+            [showPostImage]="true"
+            [postImagePath]="postBefore.imagePath"
+            [postTitle]="postBefore.title"
+            [postSlug]="postBefore.slug"
+            [postCategory]="postBefore.categories[0].name"
+            [postHighlightDescription]="postBefore.highlightDescription"
+            [postAuthor]="postBefore.author"
+            [postCreatedAt]="postBefore.created_at"
+            />
+    
+        </div>
+        <div class="advertisement my-28" *ngIf="this.ads && this.ads[1]">
+            <pontual-ads
+            [ad]="this.ads[1]"
+            [height]="'h-[144px] xl:h-[523px]'"
+            />
+        </div>
+        
+        <div *ngIf="this.postsSectionAfterAdvertisement.length > 0" class="posts-container postsAfterAdvertisement flex w-full flex-wrap gap-x-16 gap-y-16 justify-start items-stretch">
+            <pontual-post-card
+            *ngFor="let post of postsSectionAfterAdvertisement; let index = index"
+            [isFirstItem]="(index == 0) ? true : false"
+            [showPostImage]="true"
+            [postImagePath]="post.imagePath"
+            [postTitle]="post.title"
+            [postSlug]="post.slug"
+            [postCategory]="post.categories[0].name"
+            [postHighlightDescription]="post.highlightDescription"
+            [postAuthor]="post.author"
+            [postCreatedAt]="post.created_at"
+            />
+        </div>
+    }
+
 </div>

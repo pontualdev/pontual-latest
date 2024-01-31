@@ -35,9 +35,17 @@ export class MetaTagsService {
 
     return true;
   }
-  private updateDefaultMeta(thePost: PostsModel){
-    // let metaOgTitle = document.querySelector("meta[name='og:title']") as HTMLElement;
-    // metaOgTitle.setAttribute("content", "teste");
+  addMetaTag(metadata: { title: string, description: string, image: string, url: string }){
+    this.meta.addTag({ name: 'og:title', content: metadata.title });
+    this.meta.addTag({ name: 'og:description', content: metadata.description });
+    this.meta.addTag({ name: 'og:image', content: metadata.image });
+    this.meta.addTag({ name: 'og:url', content: metadata.url });
+
+    this.meta.addTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.addTag({ name: 'twitter:title', content: metadata.title });
+    this.meta.addTag({ name: 'twitter:description', content: metadata.description });
+    this.meta.addTag({ name: 'twitter:image', content: metadata.image });
+    this.meta.addTag({ name: 'twitter:url', content: metadata.url });
   }
 
 }
