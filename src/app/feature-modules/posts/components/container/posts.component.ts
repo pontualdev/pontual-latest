@@ -218,13 +218,14 @@ export class PostsComponent implements OnInit {
       return '';
     }
     
-    const startDate: Date = new Date();
-    console.log(startDate.getDate())
-    startDate.setDate(startDate.getDate() - interval);
+    // const startDate: Date = new Date();
+    // console.log(startDate.getDate())
+    // startDate.setDate(startDate.getDate() - interval);
     
-    const isoDate: string = startDate.toISOString();
+    // const isoDate: string = startDate.toISOString();
 
-    return isoDate;
+    // return isoDate;
+    return ''
 
   }
 

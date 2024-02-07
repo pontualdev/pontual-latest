@@ -6,7 +6,8 @@ const routes: Routes = [
   { path: 'posts/:category', loadChildren: () => import('./feature-modules/posts/posts.module').then(m => m.PostsModule) },
   { path: 'post/:slug', loadChildren: () => import('./feature-modules/post/post.module').then(m => m.PostModule) },
   { path: 'about', loadChildren: () => import('./feature-modules/about/about.module').then(m => m.AboutModule) },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: 'terms', loadChildren: () => import('./feature-modules/terms/terms.module').then(m => m.TermsModule) },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@
     [topLabel]="false"
     [height]="'h-[150px] sm:h-[250px]'"
     [ad]="this.ads[0]"
-    />
+    /> 
 </div>
 <div class="filter-section mt-28 xl:flex xl:justify-between xl:items-stretch">
     <div class="static-col w-full">
@@ -18,7 +18,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 20L16.1333 16.1333M18.2222 11.1111C18.2222 15.0385 15.0385 18.2222 11.1111 18.2222C7.18375 18.2222 4 15.0385 4 11.1111C4 7.18375 7.18375 4 11.1111 4C15.0385 4 18.2222 7.18375 18.2222 11.1111Z" stroke="#D3352A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>                    
-                <input type="text" class="focus:outline-none w-full bg-transparent" name="" [(ngModel)]="this.searchTerm" (keyup)="this.filterPosts()" placeholder="Pesquisar notícias..." id="">
+                <input type="text" class="focus:outline-none w-full bg-transparent"  [(ngModel)]="this.searchTerm" (keyup)="this.filterPosts()" placeholder="Pesquisar notícias..." id="">
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="inputs flex gap-x-8 flex-col lg:flex-row justify-start lg:justify-center lg:items-center">
                 <div class="categories relative">
-                    <select name="" id=""
+                    <select  id=""
                     [(ngModel)]="this.selectedCategoryForFilter"
                     (change)="this.filterPosts()"
                     (change)="this.identifyCategory()"
@@ -48,7 +48,7 @@
                     </svg>
                 </div>
                 <div class="dates my-3 lg:my-0 relative">
-                    <select name="" id=""
+                    <select  id=""
                     [(ngModel)]="this.selectedDateForFilter"
                     (change)="identifyDateByValue()"
                     (change)="this.filterPosts()"
@@ -69,7 +69,7 @@
                 </div>
                 <div class="author relative">
                     <select
-                    name=""
+                    
                     [(ngModel)]="this.selectedAuthorForFilter"
                     (change)="this.filterPosts()"
                     id=""
@@ -167,6 +167,7 @@
             />
     
         </div>
+
         <div class="advertisement my-28" *ngIf="this.ads && this.ads[1]">
             <pontual-ads
             [ad]="this.ads[1]"
