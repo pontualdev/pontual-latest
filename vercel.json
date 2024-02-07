@@ -10,7 +10,7 @@
     ],
     "functions": {
       "api/index.js": {
-        "includeFiles": "dist/pontual-latest/**"
+        "includeFiles": "dist/pontual-latest/browser/**"
       }
     }
   }
