@@ -1,4 +1,4 @@
 [[redirects]]
     from = "/*"
-    to = "/dist/pontual-latest/server/main.server.mjs"
+    to = "/dist/pontual-latest/server/server.mjs"
     status = 200
