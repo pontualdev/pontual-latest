@@ -1,4 +1,4 @@
-[[redirects]]
-    from = "/*"
-    to = "/dist/pontual-latest/server/server.mjs"
+[[edge_functions]]
+    from = "/dist"
+    to = "/src/index.html"
     status = 200

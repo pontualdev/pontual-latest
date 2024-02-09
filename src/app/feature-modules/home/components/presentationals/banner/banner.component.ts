@@ -26,7 +26,7 @@ export class BannerComponent implements OnInit, OnChanges {
         title: 'Pontual - Fonte Credível de Informação',
         description: 'Pontual é um jornal online, actualizável a qualquer hora.',
         image: this.bannerPosts[0].imagePath.mediumImageSize ?? '',
-        url: 'https://fridoom.com'
+        url: 'https://pontual-ao.com'
       });
     }
   }
