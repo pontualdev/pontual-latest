@@ -1,4 +1,4 @@
 [[redirects]]
     from = "/*"
-    to = "/src/index.html"
+    to = "/dist/pontual-latest/server/main.server.mjs"
     status = 200
