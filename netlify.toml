@@ -2,3 +2,6 @@
     from = "/dist"
     to = "/src/index.html"
     status = 200
+
+[build]
+    functions = "/dist/pontual-latest/server/server.mjs"
