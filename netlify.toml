@@ -1,2 +1,0 @@
-[build]
-    functions = "/dist/pontual-latest/server/server.mjs"
