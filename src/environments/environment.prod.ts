@@ -8,8 +8,8 @@ export const environment = {
         messagingSenderId: "912140866822",
         appId: "1:912140866822:web:8ee1298fc9e335707b7a87"
     },
-    backoffice: 'https://pontualbo.pontual-ao.com/wp-json/wp/v2',
-    domain: 'https://pontualbo.pontual-ao.com',
+    backoffice: 'https://pontual-bo.fridoom.com/wp-json/wp/v2',
+    domain: 'https://pontual-bo.fridoom.com',
     newsletter: {
         endpoint: 'https://pontualbo.pontual-ao.com/wp-json/newsletter/v2',
         clientKey: 'e32b6d4a05fbb0fad1ea4212de9808b10f77ef16',

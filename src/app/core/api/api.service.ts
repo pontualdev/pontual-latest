@@ -30,6 +30,7 @@ export class ApiService {
   ){
     this.http.get<CategoriesModel[]>(`${environment.backoffice}/categories?per_page=100&${CATEGORIES_WANTED_FIELDS}`)
              .pipe(
+                  // tap(console.log),
                   // order categories by number of posts
                   map((nonOrderedData: any[]) => {
                     nonOrderedData.sort((x, y) => {

@@ -8,8 +8,9 @@
             <div class="background-image relative w-full h-full bg-cover bg-center"
             [style.backgroundImage]="new.imagePath.thumbnailImageSize | turnUrlable"
             >
-                <img [ngSrc]="new.imagePath.fullImageSize" width="844" height="610"
+                <img [ngSrc]="new.imagePath.fullImageSize" fill=""
                 (load)="appearWhenLoaded($event)"
+                priority=""
                 [ngClass]="{
                     'showLazyLoadImageWithTransition': this.imageMayAppear,
                     'notShowLazyLoadImageWithTransition': !this.imageMayAppear

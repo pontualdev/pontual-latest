@@ -5,7 +5,7 @@
         <div class="post-descriptions flex flex-col justify-around items-stretch">
             <div class="post-card-header relative mb-4">
                 <a routerLink="/post/{{ this.postSlug }}">
-                    <div class="post-image h-[12.5rem]" *ngIf="this.showPostImage">
+                    <div class="post-image h-[12.5rem] relative" *ngIf="this.showPostImage">
                         <div class="img relative w-full h-full rounded-[4px] bg-cover bg-center overflow-hidden"
                         [style.backgroundImage]="this.postImagePath.thumbnailImageSize | turnUrlable"
                         > 
@@ -69,7 +69,7 @@
     <div class="card-short w-full my-3 xl:my-1 xl-1440:my-3 py-4 border-y border-[#EEEEEE99] border-opacity-[60%] flex gap-3 justify-start items-stretch">
         <div
         *ngIf="this.postImagePath"
-        class="post-image w-[8.375rem] h-[7.75rem] xl:w-[8.375rem] xl:h-auto rounded-[4px] overflow-hidden"
+        class="post-image relative w-[8.375rem] h-[7.75rem] xl:w-[8.375rem] xl:h-auto rounded-[4px] overflow-hidden"
         >
             <a routerLink="/post/{{ this.postSlug }}">
                 <div class="img relative bg-cover bg-center w-full h-full"
