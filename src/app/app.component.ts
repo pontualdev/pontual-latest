@@ -26,8 +26,7 @@ export class AppComponent {
     public coreFacade: CoreFacade,
     public aboutDataCenter: AboutDataCenter,
     private apiService: ApiService,
-    @Inject(PLATFORM_ID) private platformId: any,
-    private _ngZone: NgZone
+    @Inject(PLATFORM_ID) private platformId: any
   ){}
 
   containerLabel: string = CATEGORY_CONTAINER_LABEL;
@@ -92,12 +91,10 @@ export class AppComponent {
         }
 
         if(isPlatformBrowser(this.platformId)){
-          this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => {
-              this.hasSubscribed.next(false);
-              this.hasError.next(false);
-            }, 4000);
-          });
+          setTimeout(() => {
+            this.hasSubscribed.next(false);
+            this.hasError.next(false);
+          }, 4000);
         }
 
         this.isSubscribing.next(false);

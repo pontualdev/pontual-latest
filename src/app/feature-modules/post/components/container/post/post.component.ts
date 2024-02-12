@@ -41,7 +41,6 @@ export class PostComponent implements OnInit {
     public screenDimentions: ScreenDimentions,
     private metaTagService: MetaTagsService,
     @Inject(PLATFORM_ID) private platformId: any,
-    private _ngZone: NgZone,
     private aboutDataCenter: AboutDataCenter
   ){ }
 
@@ -59,7 +58,7 @@ export class PostComponent implements OnInit {
                       })
                     )
                     .subscribe((thePost: PostsModel) => this.thePost = thePost);
-        this.postFacade.getRecommendedPosts().subscribe((recommendedPosts: PostsModel[]) => this.recommendedPosts = recommendedPosts);
+      this.postFacade.getRecommendedPosts().subscribe((recommendedPosts: PostsModel[]) => this.recommendedPosts = recommendedPosts);
     });
 
     this.postFacade.getAdvertisements().subscribe((advertisements: AdsModel[]) => this.ads = advertisements);
@@ -93,17 +92,13 @@ export class PostComponent implements OnInit {
 
   sharerTwitter(){
     if(isPlatformBrowser(this.platformId)){
-      this._ngZone.runOutsideAngular(() => {
-        window.open(`https://twitter.com/intent/tweet?text=${window.location.href}`, '_blank');
-      });
+      window.open(`https://twitter.com/intent/tweet?text=${window.location.href}`, '_blank');
     }
   }
 
   sharerLinkedin(){
     if(isPlatformBrowser(this.platformId)){
-      this._ngZone.runOutsideAngular(() => {
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?mini=true&url=${window.location.href}`, '_blank');
-      });
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?mini=true&url=${window.location.href}`, '_blank');
     }
   }
 
