@@ -4,13 +4,13 @@
     "name": "pontual-ao",
     "rewrites": [
       {
-        "source": "/post/:slug",
+        "source": "/(.*)",
         "destination": "/api"
       }
     ],
     "functions": {
       "api/index.js": {
-        "includeFiles": "dist/pontual-lates/**"
+        "includeFiles": "dist/pontual-latest/**"
       }
     }
   }
