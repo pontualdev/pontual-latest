@@ -10,7 +10,7 @@
     ],
     "functions": {
       "api/index.js": {
-        "includeFiles": "dist/pontual-latest/server/**"
+        "includeFiles": "dist/pontual-lates/**"
       }
     }
   }
