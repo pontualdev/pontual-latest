@@ -1,3 +1,14 @@
 {
-    "public": true
+    "public": true,
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/api"
+      }
+    ],
+    "functions": {
+      "api/index.js": {
+        "includeFiles": "./dist/pontual-latest/**"
+      }
+    }
 }
