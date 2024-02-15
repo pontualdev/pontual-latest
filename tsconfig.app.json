@@ -13,7 +13,7 @@
     "server.ts"
   ],
   "include": [
-    "api/*.js",
+    "api/index.js",
     "src/**/*.d.ts"
   ]
 }
