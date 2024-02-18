@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AdsModel } from '@core/base-models/ads.model';
 import { CategoriesModel, CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { PostsModel } from '@core/base-models/posts.model';
@@ -26,7 +26,8 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private abourDataCenter: AboutDataCenter
+    private abourDataCenter: AboutDataCenter,
+    private ngZone: NgZone
   ){
     this.http.get<CategoriesModel[]>(`${environment.backoffice}/categories?per_page=100&${CATEGORIES_WANTED_FIELDS}`)
              .pipe(
@@ -189,20 +190,23 @@ export class ApiService {
           }
       });
     })
-    setTimeout(() => {
-      // order from categories with more posts to less
-      categoriesWithPostsArray.sort((x, y) => {
-          if (x.entries.length < y.entries.length) {
-           return 1;
-          }
-          if (x.entries.length > y.entries.length) {
-           return -1;
-          }
-          return 0;
-      })
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        // order from categories with more posts to less
+        categoriesWithPostsArray.sort((x, y) => {
+            if (x.entries.length < y.entries.length) {
+             return 1;
+            }
+            if (x.entries.length > y.entries.length) {
+             return -1;
+            }
+            return 0;
+        })
+  
+        this.categoriesWithPosts$.next(categoriesWithPostsArray);
+      }, waitInSeconds * 1000)
 
-      this.categoriesWithPosts$.next(categoriesWithPostsArray);
-    }, waitInSeconds * 1000)
+    })
   }
 
   getBannerPosts(limit: number = 4): Observable<PostsModel[]>{
