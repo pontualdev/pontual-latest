@@ -19,6 +19,7 @@ export class AdsComponent implements OnInit, OnChanges {
   @Input() height: string = 'h-[523px]';
   @Input() ad: AdsModel = {
       imagePath: {
+        allSizes: {},
         fullImageSize: '',
         thumbnailImageSize: ''
       },

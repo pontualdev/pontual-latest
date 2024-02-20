@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { Inject, Injectable, NgZone, PLATFORM_ID } from '@angular/core';
 import { AdsModel } from '@core/base-models/ads.model';
 import { CategoriesModel, CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { PostsModel } from '@core/base-models/posts.model';
@@ -27,7 +28,8 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private abourDataCenter: AboutDataCenter,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: any
   ){
     this.http.get<CategoriesModel[]>(`${environment.backoffice}/categories?per_page=100&${CATEGORIES_WANTED_FIELDS}`)
              .pipe(
@@ -112,6 +114,7 @@ export class ApiService {
                         advertisements.push({
                           page: anuncio.pagina_de_visualizacao,
                           imagePath: {
+                            allSizes: anuncio.imagem_do_anuncio.sizes,
                             fullImageSize: anuncio.imagem_do_anuncio.url,
                             thumbnailImageSize: anuncio.imagem_do_anuncio.sizes?.thumbnail
                           },
@@ -190,23 +193,25 @@ export class ApiService {
           }
       });
     })
-    this.ngZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        // order from categories with more posts to less
-        categoriesWithPostsArray.sort((x, y) => {
-            if (x.entries.length < y.entries.length) {
-             return 1;
-            }
-            if (x.entries.length > y.entries.length) {
-             return -1;
-            }
-            return 0;
-        })
+    if(isPlatformBrowser(this.platformId)){
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          // order from categories with more posts to less
+          categoriesWithPostsArray.sort((x, y) => {
+              if (x.entries.length < y.entries.length) {
+               return 1;
+              }
+              if (x.entries.length > y.entries.length) {
+               return -1;
+              }
+              return 0;
+          })
+    
+          this.categoriesWithPosts$.next(categoriesWithPostsArray);
+        }, waitInSeconds * 1000)
   
-        this.categoriesWithPosts$.next(categoriesWithPostsArray);
-      }, waitInSeconds * 1000)
-
-    })
+      })
+    }
   }
 
   getBannerPosts(limit: number = 4): Observable<PostsModel[]>{
@@ -302,20 +307,20 @@ export class ApiService {
 
     let response: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
-    let inter = setInterval(() => {
-
-      if(this.abourDataCenter.weatherAppKey.getValue() != ''){
-        this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.abourDataCenter.weatherAppKey.getValue()}&units=metric`).subscribe({
-          next: (incomingData: any) => {
-            response.next(incomingData);
-          }
-        });
-        clearInterval(inter);
-      }else{
-
-      }
-      
-    }, 1000)
+    if(isPlatformBrowser(this.platformId)){
+      let inter = setInterval(() => {
+        if(this.abourDataCenter.weatherAppKey.getValue() != ''){
+          this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.abourDataCenter.weatherAppKey.getValue()}&units=metric`).subscribe({
+            next: (incomingData: any) => {
+              response.next(incomingData);
+            }
+          });
+          clearInterval(inter);
+        }else{
+  
+        }
+      }, 1000)
+    }
 
     return response;
 
