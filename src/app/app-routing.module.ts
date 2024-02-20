@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'post/:slug', loadChildren: () => import('./feature-modules/post/post.module').then(m => m.PostModule) },
   { path: 'about', loadChildren: () => import('./feature-modules/about/about.module').then(m => m.AboutModule) },
   { path: 'terms', loadChildren: () => import('./feature-modules/terms/terms.module').then(m => m.TermsModule) },
-  // { path: '**', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
