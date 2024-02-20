@@ -36,70 +36,70 @@ export class PostComponent implements OnInit {
   recommendedPosts: PostsModel[] = [];
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private postFacade: PostFacade,
-    public screenDimentions: ScreenDimentions,
-    private metaTagService: MetaTagsService,
-    @Inject(PLATFORM_ID) private platformId: any,
-    private aboutDataCenter: AboutDataCenter
+    // private activatedRoute: ActivatedRoute,
+    // private postFacade: PostFacade,
+    // public screenDimentions: ScreenDimentions,
+    // private metaTagService: MetaTagsService,
+    // @Inject(PLATFORM_ID) private platformId: any,
+    // private aboutDataCenter: AboutDataCenter
   ){ }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((param: any) => {
-      const postSlug = param['slug'];
-      this.postFacade.getPostBySlug(postSlug)
-                    .pipe(
-                      map((thePost: PostsModel) => {
+    // this.activatedRoute.params.subscribe((param: any) => {
+    //   const postSlug = param['slug'];
+    //   this.postFacade.getPostBySlug(postSlug)
+    //                 .pipe(
+    //                   map((thePost: PostsModel) => {
 
-                        this.metaTagService.addPostDetailsForSocialMediaShareProccess(thePost);
+    //                     this.metaTagService.addPostDetailsForSocialMediaShareProccess(thePost);
 
-                        this.postFacade.getRelatedPosts(thePost.categories[0].id, thePost.id).subscribe((relatedPosts: PostsModel[]) => this.relatedPosts = relatedPosts)
-                        return thePost;
-                      })
-                    )
-                    .subscribe((thePost: PostsModel) => this.thePost = thePost);
-      this.postFacade.getRecommendedPosts().subscribe((recommendedPosts: PostsModel[]) => this.recommendedPosts = recommendedPosts);
-    });
+    //                     this.postFacade.getRelatedPosts(thePost.categories[0].id, thePost.id).subscribe((relatedPosts: PostsModel[]) => this.relatedPosts = relatedPosts)
+    //                     return thePost;
+    //                   })
+    //                 )
+    //                 .subscribe((thePost: PostsModel) => this.thePost = thePost);
+    //   this.postFacade.getRecommendedPosts().subscribe((recommendedPosts: PostsModel[]) => this.recommendedPosts = recommendedPosts);
+    // });
 
-    this.postFacade.getAdvertisements().subscribe((advertisements: AdsModel[]) => this.ads = advertisements);
+    // this.postFacade.getAdvertisements().subscribe((advertisements: AdsModel[]) => this.ads = advertisements);
 
   }
   
-  appearWhenLoaded($event: any){
-    this.imageMayAppear = true;
-  }
+  // appearWhenLoaded($event: any){
+  //   this.imageMayAppear = true;
+  // }
 
-  getPersonRoleByName(personName?: string): string{
+  // getPersonRoleByName(personName?: string): string{
 
-    if(personName?.toLocaleLowerCase() === "chat-gpt"){
-      return ROLE_IN_CASE_POST_OWNER_IS_CHAT_GPT; // Inteligência Artificial
-    }
+  //   if(personName?.toLocaleLowerCase() === "chat-gpt"){
+  //     return ROLE_IN_CASE_POST_OWNER_IS_CHAT_GPT; // Inteligência Artificial
+  //   }
     
-    let findedPerson: PontualTeam | 'not-found' = (pontualTeamDataTransformer(this.aboutDataCenter.team.getValue()) ?? PONTUAL_TEAM).find( (person: PontualTeam) => person.name === personName ) ?? 'not-found';
+  //   let findedPerson: PontualTeam | 'not-found' = (pontualTeamDataTransformer(this.aboutDataCenter.team.getValue()) ?? PONTUAL_TEAM).find( (person: PontualTeam) => person.name === personName ) ?? 'not-found';
 
-    if(findedPerson == 'not-found'){
-      return USER_ROLE_FROM_BACKOFFICE_NOT_INCLUDED_ON_PONTUAL_TEAM; // Jornalista
-    }
+  //   if(findedPerson == 'not-found'){
+  //     return USER_ROLE_FROM_BACKOFFICE_NOT_INCLUDED_ON_PONTUAL_TEAM; // Jornalista
+  //   }
 
-    return findedPerson.role;
-  }
+  //   return findedPerson.role;
+  // }
 
-  sharerFacebook(){
-    if(isPlatformBrowser(this.platformId)){
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}%2F&amp;src=sdkpreparse`, '_blank')
-    }
-  }
+  // sharerFacebook(){
+  //   if(isPlatformBrowser(this.platformId)){
+  //     window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}%2F&amp;src=sdkpreparse`, '_blank')
+  //   }
+  // }
 
-  sharerTwitter(){
-    if(isPlatformBrowser(this.platformId)){
-      window.open(`https://twitter.com/intent/tweet?text=${window.location.href}`, '_blank');
-    }
-  }
+  // sharerTwitter(){
+  //   if(isPlatformBrowser(this.platformId)){
+  //     window.open(`https://twitter.com/intent/tweet?text=${window.location.href}`, '_blank');
+  //   }
+  // }
 
-  sharerLinkedin(){
-    if(isPlatformBrowser(this.platformId)){
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?mini=true&url=${window.location.href}`, '_blank');
-    }
-  }
+  // sharerLinkedin(){
+  //   if(isPlatformBrowser(this.platformId)){
+  //     window.open(`https://www.linkedin.com/sharing/share-offsite/?mini=true&url=${window.location.href}`, '_blank');
+  //   }
+  // }
 
 }
