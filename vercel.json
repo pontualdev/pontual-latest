@@ -1,5 +1,7 @@
 {
     "public": true,
+    "name": "pontual-ao",
+    "version": 2,
     "rewrites": [
       {
         "source": "/(.*)",
