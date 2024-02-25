@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, NgZone, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { AdsModel } from '@core/base-models/ads.model';
 import { CategoriesModel, CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { PostsModel } from '@core/base-models/posts.model';
@@ -28,7 +28,6 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private abourDataCenter: AboutDataCenter,
-    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ){
     this.http.get<CategoriesModel[]>(`${environment.backoffice}/categories?per_page=100&${CATEGORIES_WANTED_FIELDS}`)
@@ -194,7 +193,6 @@ export class ApiService {
       });
     })
     if(isPlatformBrowser(this.platformId)){
-      this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           // order from categories with more posts to less
           categoriesWithPostsArray.sort((x, y) => {
@@ -209,8 +207,6 @@ export class ApiService {
     
           this.categoriesWithPosts$.next(categoriesWithPostsArray);
         }, waitInSeconds * 1000)
-  
-      })
     }
   }
 

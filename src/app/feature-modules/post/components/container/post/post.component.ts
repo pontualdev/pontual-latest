@@ -1,4 +1,4 @@
-import { Component, Inject, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostFacade } from '../../../facades/post.facade';
 import { AdsModel } from '@core/base-models/ads.model';

@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, NgZone, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { PostsModel } from '@core/base-models/posts.model';
 
@@ -13,7 +13,6 @@ export class MetaTagsService {
   constructor(
     private meta: Meta,
     @Inject(PLATFORM_ID) private platformId: any,
-    private ngZone: NgZone
   ) {
     if(isPlatformBrowser(this.platformId)){
       this.url = window.location.href;
