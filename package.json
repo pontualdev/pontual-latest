@@ -1,7 +1,7 @@
 {
   "name": "pontual-latest",
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

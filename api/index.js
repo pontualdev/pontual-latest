@@ -1,3 +1,3 @@
-const server = import('../dist/pontual-latest/server/server.mjs');
+import * as server from '../dist/pontual-latest/server/server.mjs';
 
-module.exports = server.app;
+export default server.app();
