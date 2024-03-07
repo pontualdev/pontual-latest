@@ -10,9 +10,21 @@ const routes: Routes = [
     path: '',
     component: AboutComponent,
     children: [
-      { path: 'editoral-status', component: EditoralStatusComponent },
-      { path: 'contacts', component: ContactsComponent },
-      { path: 'team', component: TeamComponent }
+      {
+        path: 'editoral-status',
+        title: 'Pontual AO. - Estatuto editorial',
+        component: EditoralStatusComponent
+      },
+      {
+        path: 'contacts',
+        title: 'Pontual AO. - Contactos',
+        component: ContactsComponent
+      },
+      {
+        path: 'team',
+        title: 'Pontual AO. - Equipa',
+        component: TeamComponent
+      }
     ],
   },
   // {
