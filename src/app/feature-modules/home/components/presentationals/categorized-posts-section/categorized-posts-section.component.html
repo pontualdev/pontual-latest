@@ -24,11 +24,11 @@
             }"
             [className]="'scrollEnabled-' + section.sectionSlug"
             >
-                <div class="posts-container flex w-fit md:w-full lg:w-max flex-col md:flex-row md:flex-wrap lg:flex-nowrap lg:flex-row gap-x-16 gap-y-12 items-center lg:justify-start lg:items-stretch"
+                <div class="posts-container flex w-fit md:w-full lg:w-max flex-col md:flex-row md:flex-wrap lg:flex-nowrap lg:flex-row items-center lg:justify-start lg:items-stretch"
                 [ngClass]="
                 {
-                    'xl:w-max': !section.postsWrap,
-                    'xl:w-full xl:flex-wrap': section.postsWrap,
+                    'xl:w-max gap-x-16 gap-y-12': !section.postsWrap,
+                    'xl:w-full xl:flex-wrap gap-x-12 gap-y-16': section.postsWrap,
                     'md:justify-around': (section.data.length % 2) == 0,
                     'md:justify-start': (section.data.length % 2) != 0,
                 }"
@@ -48,7 +48,7 @@
                     />
         
                     <div class="button flex items-center justify-center"
-                    *ngIf="!this.isSpecialSection(section.sectionTitle) && (section.data.length > 7)"
+                    *ngIf="!this.isSpecialSection(section.sectionTitle) && (section.data.length >= 7)"
                     >
                         <a routerLink="/posts/{{ section.sectionSlug.toLowerCase() }}" class=" flex gap-4 bg-primary text-white rounded-full py-4 px-8">
                             Ver todas as notícias
@@ -58,7 +58,8 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="button flex items-center justify-center xl:hidden"
+                    <div class="button w-full flex items-center justify-center"
+                    *ngIf="this.isSpecialSection(section.sectionTitle)"
                     >
                         <a routerLink="/posts/{{ section.sectionSlug.toLowerCase() }}" class=" flex gap-4 bg-primary text-white rounded-full py-4 px-8">
                             Ver todas as notícias

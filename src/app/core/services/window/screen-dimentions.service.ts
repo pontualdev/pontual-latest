@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { ScreenTypeEnum } from '@core/Enums/window/screen-type.enum';
 
 interface ScreenDimentionsInterface{
   width: number,
@@ -16,15 +17,7 @@ export class ScreenDimentions {
     heigth: 0
   }
 
-  private screenType:
-                    'mobile'      | // < 375
-                    'tablet-sm'   | // 425
-                    'tablet-lg'   | // 768
-                    'laptop-sm'   | // 1024
-                    'laptop-lg'   | // 1440
-                    'desktop-sm'  | // 1280
-                    'desktop-lg'  | // 1536
-                    'desktop-2xl' = 'mobile' // > 1536
+  private screenType: ScreenTypeEnum = ScreenTypeEnum.MOBILE;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any
@@ -47,38 +40,38 @@ export class ScreenDimentions {
     return this.screen;
   }
 
-  public get getScreenType(): string{
+  public get getScreenType(): ScreenTypeEnum{
     return this.screenType;
   }
 
   private determineScreenType(screenWidth: number){
 
     if(screenWidth <= 375){
-      this.screenType = 'mobile';
+      this.screenType = ScreenTypeEnum.MOBILE;
       return;
 
     }else if(screenWidth > 375 && screenWidth < 768){
-      this.screenType = 'tablet-sm';
+      this.screenType = ScreenTypeEnum.TABLET_SMALL;
       return;
       
     }else if(screenWidth >= 768 && screenWidth < 1024){
-      this.screenType = 'tablet-lg';
+      this.screenType = ScreenTypeEnum.TABLET_LARGE;
       return;
       
     }else if(screenWidth >= 1024 && screenWidth < 1440){
-      this.screenType = 'laptop-sm';
+      this.screenType = ScreenTypeEnum.LAPTOP_SMALL;
       return;
       
     }else if(screenWidth >= 1440 && screenWidth < 1280){
-      this.screenType = 'laptop-lg';
+      this.screenType = ScreenTypeEnum.LAPTOP_LARGE;
       return;
       
     }else if(screenWidth >= 1280 && screenWidth < 1536){
-      this.screenType = 'desktop-sm';
+      this.screenType = ScreenTypeEnum.DESKTOP_SMALL;
       return;
       
     }else {
-      this.screenType = 'desktop-lg';
+      this.screenType = ScreenTypeEnum.DESKTOP_LARGE;
       return;
     }
 

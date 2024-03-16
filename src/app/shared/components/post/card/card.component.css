@@ -1,4 +1,4 @@
-.card-tall:not(.first-item)::before{
+/* .card-tall:not(.first-item)::before{
     content: '';
     display: none;
     position: absolute;
@@ -14,4 +14,4 @@
     .card-tall:not(.first-item)::before{
         display: block;
     }
-}
+} */

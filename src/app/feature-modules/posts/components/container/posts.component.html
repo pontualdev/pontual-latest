@@ -175,7 +175,7 @@
             />
         </div>
         
-        <div *ngIf="this.postsSectionAfterAdvertisement.length > 0" class="posts-container postsAfterAdvertisement flex w-full flex-wrap gap-x-16 gap-y-16 justify-start items-stretch">
+        <div *ngIf="this.postsSectionAfterAdvertisement.length > 0" class="posts-container postsAfterAdvertisement flex w-full flex-wrap gap-x-12 gap-y-16 justify-start items-stretch">
             <pontual-post-card
             *ngFor="let post of postsSectionAfterAdvertisement; let index = index"
             [isFirstItem]="(index == 0) ? true : false"

@@ -1,6 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Inject, PLATFORM_ID } from '@angular/core';
+import { ScreenTypeEnum } from '@core/Enums/window/screen-type.enum';
 import { AdsModel } from '@core/base-models/ads.model';
+import { ScreenDimentions } from '@core/services/window/screen-dimentions.service';
 
 @Component({
   selector: 'pontual-ads',
@@ -11,7 +13,8 @@ import { AdsModel } from '@core/base-models/ads.model';
 export class AdsComponent implements OnInit, OnChanges {
   
   constructor(
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) private platformId: any,
+    public screenDimentions: ScreenDimentions
   ){ }
 
   @Input() width: string = 'w-full';
@@ -19,7 +22,26 @@ export class AdsComponent implements OnInit, OnChanges {
   @Input() height: string = 'h-[523px]';
   @Input() ad: AdsModel = {
       imagePath: {
-        allSizes: {},
+        allSizes: {
+          '1536x1536': '',
+          '1536x1536-height': 0,
+          '1536x1536-width': 0,
+          '2048x2048': '',
+          '2048x2048-height': 0,
+          '2048x2048-width': 0,
+          large: '',
+          'large-height': 0,
+          'large-width': 0,
+          medium: '',
+          'medium-height': 0,
+          'medium-width': 0,
+          medium_large: '',
+          'medium_large-height': 0,
+          'medium_large-width': 0,
+          thumbnail: '',
+          'thumbnail-height': 0,
+          'thumbnail-width': 0
+        },
         fullImageSize: '',
         thumbnailImageSize: ''
       },
@@ -33,6 +55,7 @@ export class AdsComponent implements OnInit, OnChanges {
     
   }
   ngOnChanges(changes: SimpleChanges): void {
+    
   }
 
   appearWhenLoaded($event: any){
@@ -45,6 +68,27 @@ export class AdsComponent implements OnInit, OnChanges {
         window.open(this.ad.link, '_blank');
       }
     }
+  }
+
+  get getImageHeigthAccordingTheScreenType(): number{
+
+    switch(this.screenDimentions.getScreenType){
+      case ScreenTypeEnum.MOBILE:
+        return this.ad.imagePath.allSizes['medium-height'];
+
+      case ScreenTypeEnum.TABLET_SMALL || ScreenTypeEnum.TABLET_LARGE:
+        return this.ad.imagePath.allSizes['medium_large-height'];
+
+      case ScreenTypeEnum.LAPTOP_SMALL || ScreenTypeEnum.LAPTOP_LARGE:
+        return this.ad.imagePath.allSizes['large-height'];
+      
+      case ScreenTypeEnum.DESKTOP_SMALL || ScreenTypeEnum.DESKTOP_LARGE:
+        return this.ad.imagePath.allSizes['1536x1536-height']
+      
+      default:
+        return this.ad.imagePath.allSizes['2048x2048-height']
+    }
+
   }
 
 }

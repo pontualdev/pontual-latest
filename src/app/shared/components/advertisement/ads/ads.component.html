@@ -6,17 +6,20 @@ class="ads"
     *ngIf="this.topLabel"
     >-Publicidade-</h1>
     <a (click)="openLink()" [ngClass]="{'cursor-pointer': this.ad.link != ''}">
-        <div class="image-section relative {{ this.width }} {{ this.height }} bg-center bg-cover"
+        <div class="image-section relative bg-center bg-cover"
         [style.backgroundImage]="this.ad.imagePath.thumbnailImageSize | turnUrlable"
+        [style.height.px]="this.getImageHeigthAccordingTheScreenType"
         >
             <img
             [ngSrc]="this.ad.imagePath.fullImageSize" fill
+            loading="lazy"
+            [srcset]="[this.ad.imagePath.allSizes.medium, this.ad.imagePath.allSizes.medium_large, this.ad.imagePath.fullImageSize]"
             (load)="appearWhenLoaded($event)"
             [ngClass]="{
                 'showLazyLoadImageWithTransition': this.imageMayAppear,
                 'notShowLazyLoadImageWithTransition': !this.imageMayAppear
             }"
-            class="w-full object-cover object-center" alt="">
+            class="w-full object-cove object-center" alt="">
         </div>
     </a>
 </div>
