@@ -46,11 +46,11 @@ export class ScreenDimentions {
 
   private determineScreenType(screenWidth: number){
 
-    if(screenWidth <= 375){
+    if(screenWidth <= 500){
       this.screenType = ScreenTypeEnum.MOBILE;
       return;
 
-    }else if(screenWidth > 375 && screenWidth < 768){
+    }else if(screenWidth > 500 && screenWidth < 768){
       this.screenType = ScreenTypeEnum.TABLET_SMALL;
       return;
       

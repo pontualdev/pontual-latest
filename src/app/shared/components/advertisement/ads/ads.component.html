@@ -11,15 +11,16 @@ class="ads"
         [style.height.px]="this.getImageHeigthAccordingTheScreenType"
         >
             <img
-            [ngSrc]="this.ad.imagePath.fullImageSize" fill
+            [ngSrc]="this.ad.imagePath.fullImageSize"
             loading="lazy"
+            fill=""
             [srcset]="[this.ad.imagePath.allSizes.medium, this.ad.imagePath.allSizes.medium_large, this.ad.imagePath.fullImageSize]"
             (load)="appearWhenLoaded($event)"
             [ngClass]="{
                 'showLazyLoadImageWithTransition': this.imageMayAppear,
                 'notShowLazyLoadImageWithTransition': !this.imageMayAppear
             }"
-            class="w-full object-cove object-center" alt="">
+            class="w-full h-full object-cove object-center" alt="">
         </div>
     </a>
 </div>
