@@ -145,8 +145,8 @@
             </h1>
         </div>
         <div class="posts-container postsBeforeAdvertisement flex w-full flex-wrap gap-x-12 gap-y-16 justify-center lg:justify-start items-stretch">
-            <!-- @if(this.recommendedPosts && this.recommendedPosts.length > 0){ -->
-                <!-- <pontual-post-card
+            @if(this.recommendedPosts && this.recommendedPosts.length > 0){
+                <pontual-post-card
                 *ngFor="let post of this.recommendedPosts; let index = index"
                 [isFirstItem]="(index == 0) ? true : false"
                 [showPostImage]="true"
@@ -156,9 +156,9 @@
                 [postCategory]="post.categories[0].name"
                 [postHighlightDescription]="post.highlightDescription"
                 [postAuthor]="post.author"
-                [postCreatedAt]="post.created_at" -->
+                [postCreatedAt]="post.created_at"
                 />
-            <!-- } -->
+            }
     
         </div>
     </div>
