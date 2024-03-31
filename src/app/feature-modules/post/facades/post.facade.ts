@@ -2,7 +2,9 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/api/api.service';
 import { AdsModel } from '@core/base-models/ads.model';
 import { PostsModel } from '@core/base-models/posts.model';
+import { LIMIT_OF_RECOMMENDED_POSTS_ON_POST_DETAILS, LIMIT_OF_RELATED_POSTS_ON_POST_DETAILS } from '@core/constants/limitations';
 import { READING_PAGE_INDEX_ID } from '@core/constants/pages';
+import { CorePostFacade } from '@core/facades/core-post.facade';
 
 import { BehaviorSubject, Observable, map, pipe, tap } from 'rxjs';
 
@@ -16,7 +18,8 @@ export class PostFacade implements OnInit{
     private recommendedPosts$: BehaviorSubject<PostsModel[]> = new BehaviorSubject<PostsModel[]>([]);
 
     constructor(
-        private api: ApiService
+        private api: ApiService,
+        private corePostFacade: CorePostFacade
     ) {}
 
     ngOnInit(): void {
@@ -35,18 +38,11 @@ export class PostFacade implements OnInit{
     }
 
     getRelatedPosts(categoryId: number, excluded_id?: number): Observable<PostsModel[]>{
-        return this.api.getPostsFromCategory(4, categoryId, excluded_id);
+        return this.api.getPostsFromCategory(LIMIT_OF_RELATED_POSTS_ON_POST_DETAILS, categoryId, excluded_id);
     }
 
     getRecommendedPosts(): Observable<PostsModel[]>{
-        if(this.recommendedPosts$.getValue().length == 0)
-            this.api.getRecentPosts(8).subscribe({
-                next: (recommendedPosts: PostsModel[]) => {
-                    this.recommendedPosts$.next(recommendedPosts);
-                }
-            });
-        
-        return this.recommendedPosts$;
+        return this.corePostFacade.getRecommendedPosts();
     }
 
     getPostBySlug(slug: string): Observable<PostsModel>{

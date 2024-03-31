@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@core/api/api.service';
 import { AdsModel } from '@core/base-models/ads.model';
-import { CategoriesModel, CategoriesWithPostsModel } from '@core/base-models/categories.model';
+import { CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { PostsModel } from '@core/base-models/posts.model';
 import { HOME_PAGE_INDEX_ID } from '@core/constants/pages';
+import { CorePostFacade } from '@core/facades/core-post.facade';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 
 @Injectable({
@@ -18,9 +19,10 @@ export class HomeFacade{
     private highlightedPosts$: BehaviorSubject<PostsModel[]> = new BehaviorSubject<PostsModel[]>([]);
     private recentPosts$: BehaviorSubject<PostsModel[]> = new BehaviorSubject<PostsModel[]>([]);
 
-    constructor(private api: ApiService){
-
-    }
+    constructor(
+        private api: ApiService,
+        private corePostFacade: CorePostFacade
+    ){}
 
     getBannerPosts(limit?: number): Observable<PostsModel[]>{
 
@@ -60,7 +62,7 @@ export class HomeFacade{
     }
 
     getRecentPosts(): Observable<PostsModel[]>{
-        this.api.getRecentPosts().subscribe({
+        this.corePostFacade.getRecentPosts().subscribe({
             next: (posts: PostsModel[]) => {
                 this.recentPosts$.next(posts);
             }

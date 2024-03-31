@@ -5,7 +5,7 @@ import { AdsModel } from '@core/base-models/ads.model';
 import { CategoriesModel, CategoriesWithPostsModel } from '@core/base-models/categories.model';
 import { PostsModel } from '@core/base-models/posts.model';
 import { ADS_WANTED_FIELDS, CATEGORIES_WANTED_FIELDS, POSTS_WANTED_FIELDS } from '@core/constants/fields';
-import { LIMIT_OF_CATEGORIES_ON_MENU, LIMIT_OF_POSTS_PER_CATEGORIES_ON_HOME_PAGE, LIMIT_OF_RECENT_POSTS } from '@core/constants/limitations';
+import { LIMIT_OF_CATEGORIES_ON_HOME_PAGE, LIMIT_OF_CATEGORIES_ON_MENU, LIMIT_OF_POSTS_PER_CATEGORIES_ON_HOME_PAGE, LIMIT_OF_RECENT_POSTS } from '@core/constants/limitations';
 import { HOME_PAGE_INDEX_ID, READING_PAGE_INDEX_ID, RESULTS_PAGE_INDEX_ID, SEE_POSTS_PAGE_INDEX_ID } from '@core/constants/pages';
 import { CATEGORY_CONTAINER_ID, CATEGORY_CONTAINER_LABEL, CATEGORY_CONTAINER_SLUG } from '@core/mock/Categories.mock';
 import { AboutDataCenter } from '@core/services/data/datacenter.service';
@@ -179,19 +179,30 @@ export class ApiService {
 
   fulfillCategoriesWithPosts(categories: CategoriesModel[], waitInSeconds: number = 3){
     let categoriesWithPostsArray: CategoriesWithPostsModel[] = [];
-
-    categories.forEach((category: CategoriesModel) => {
-      this.getPostsFromCategory(LIMIT_OF_POSTS_PER_CATEGORIES_ON_HOME_PAGE, category.id).subscribe({
+    // categories.forEach((category: CategoriesModel) => {
+    //   this.getPostsFromCategory(LIMIT_OF_POSTS_PER_CATEGORIES_ON_HOME_PAGE, category.id).subscribe({
+    //       next: (postsFromCategory: PostsModel[]) => {
+    //         categoriesWithPostsArray.push({
+    //             categoryId: category.id,
+    //             label: category.label,
+    //             slug: category.slug,
+    //             entries: postsFromCategory
+    //         });
+    //       }
+    //   });
+    // })
+    for (let index = 0; index < LIMIT_OF_CATEGORIES_ON_HOME_PAGE; index++) {
+      this.getPostsFromCategory(LIMIT_OF_POSTS_PER_CATEGORIES_ON_HOME_PAGE, categories[index].id).subscribe({
           next: (postsFromCategory: PostsModel[]) => {
             categoriesWithPostsArray.push({
-                categoryId: category.id,
-                label: category.label,
-                slug: category.slug,
+                categoryId: categories[index].id,
+                label: categories[index].label,
+                slug: categories[index].slug,
                 entries: postsFromCategory
             });
           }
       });
-    })
+    }
     if(isPlatformBrowser(this.platformId)){
         setTimeout(() => {
           // order from categories with more posts to less
@@ -232,7 +243,7 @@ export class ApiService {
     let per_page = 0;
     
     per_page = (limit) ? limit : LIMIT_OF_RECENT_POSTS;
-
+    // console.log(`${environment.backoffice}/posts?per_page=${per_page + '&' + POSTS_WANTED_FIELDS }`)
     return this.http.get<PostsModel[]>(`${environment.backoffice}/posts?per_page=${per_page + '&' + POSTS_WANTED_FIELDS }`)
                     .pipe(
                       map((nonTransformedData: any[]) => {
