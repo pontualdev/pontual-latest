@@ -96,6 +96,12 @@ export class PostComponent implements OnInit {
     }
   }
 
+  // sharerWhatsapp(){
+  //   if(isPlatformBrowser(this.platformId)){
+  //     window.open(`https://api.whatsapp.com/send?link=${window.location.href}&text=${window.location.href}`, '_blank');
+  //   }
+  // }
+
   sharerLinkedin(){
     if(isPlatformBrowser(this.platformId)){
       window.open(`https://www.linkedin.com/sharing/share-offsite/?mini=true&url=${window.location.href}`, '_blank');
